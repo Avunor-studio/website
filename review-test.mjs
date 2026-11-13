@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import worker from './worker.mjs';
+const records=new Map();const bucket={get:async key=>records.has(key)?{json:async()=>JSON.parse(records.get(key))}:null,put:async(key,value)=>records.set(key,value),list:async()=>({objects:[...records.keys()].map(key=>({key}))})};
+const env={BUCKET:bucket};const url='https://avunor.example/api/reviews';
+const valid={id:crypto.randomUUID(),name:'Test client',project:'Website',rating:4,text:'Useful collaboration and a clear website.',completed:true,consent:true};
+const post=(body,origin='https://avunor.example')=>worker.fetch(new Request(url,{method:'POST',headers:{Origin:origin,'Content-Type':'application/json'},body:JSON.stringify(body)}),env);
+assert.equal((await post(valid)).status,201);
+assert.equal((await post(valid)).status,200);assert.equal(records.size,1);
+assert.equal((await post({...valid,completed:false})).status,400);
+assert.equal((await post({...valid,consent:false})).status,400);
+assert.equal((await post({...valid,rating:6})).status,400);
+assert.equal((await post({...valid,text:'short'})).status,400);
+assert.equal((await post(valid,'https://other.example')).status,403);
+const reviews=await (await worker.fetch(new Request(url),env)).json();assert.equal(reviews.reviews[0].name,'Test client');
+assert.equal((await worker.fetch(new Request(url),{})).status,503);
+assert.equal((await worker.fetch(new Request(url,{method:'DELETE'}),env)).status,405);
+console.log('Passed: storage round-trip, retry deduplication, field validation, consent, completion, origin and storage failures.');

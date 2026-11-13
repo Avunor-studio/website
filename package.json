@@ -1,0 +1,15 @@
+{
+  "name": "avunor-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AVUNOR company website and monochrome brand assets",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node build.mjs && node review-preview.mjs",
+    "test": "node review-test.mjs",
+    "brand:generate": "node brand/generate-brand.mjs",
+    "brand:validate": "node brand/validate-brand.mjs"
+  },
+  "devDependencies": { "sharp": "0.35.5" }
+}
