@@ -134,3 +134,8 @@ footer .brand { display: flex; align-items: center; width: 200px; max-width: 100
   footer { grid-template-columns: minmax(0, 1fr); }
   footer > span, footer > a:last-child { justify-self: start; }
 }
+
+#contact-links { align-items: flex-start; gap: 16px; }
+.contact-email-group { display: flex; flex-direction: column; min-width: 0; max-width: 100%; gap: 6px; }
+.contact-email-app { display: inline-flex; align-items: center; min-height: 44px; font-size: 13px; text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 600px) { .contact-email-group, .contact-email-group > .button { width: 100%; } }
