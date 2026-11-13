@@ -1,2 +1,2 @@
-// Add your business details here when ready. WhatsApp: international digits only.
-window.AVUNOR_CONTACT = { email: '', whatsapp: '' };
+// Public business contact details. WhatsApp accepts international formatting.
+window.AVUNOR_CONTACT = { email: 'avunorstudio@gmail.com', whatsapp: '+91 94420 41516' };

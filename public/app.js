@@ -9,7 +9,7 @@ matchMedia('(min-width: 1001px)').addEventListener('change', closeMenu);
 document.querySelector('#year').textContent = new Date().getFullYear();
 const contact = window.AVUNOR_CONTACT || {};
 const links = [];
-if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact.email || '')) links.push(['Email us ↗', 'mailto:' + contact.email]);
+if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact.email || '')) links.push([contact.email + ' ↗', 'mailto:' + contact.email]);
 const phone = (contact.whatsapp || '').replace(/[\s+()-]/g, '');
-if (/^[1-9]\d{6,14}$/.test(phone)) links.push(['Chat on WhatsApp ↗', 'https://wa.me/' + phone]);
+if (/^[1-9]\d{6,14}$/.test(phone)) links.push(['WhatsApp ' + contact.whatsapp + ' ↗', 'https://wa.me/' + phone]);
 if (links.length) { const holder = document.querySelector('#contact-links'); holder.replaceChildren(); links.forEach(([label, href]) => { const link = document.createElement('a'); link.className = 'button'; link.textContent = label; link.href = href; holder.append(link); }); }
