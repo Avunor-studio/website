@@ -15,8 +15,8 @@ Production canonical URL: https://www.avunorstudio.store/
 
 ## Google Search Console setup
 
-1. Use the `https://www.avunorstudio.store/` URL-prefix property in Google Search Console.
-2. Verify ownership using the Google verification meta tag in the home page. Keep that tag in place to stay verified. A domain-wide property can optionally be added later using DNS verification.
+1. Use the `avunorstudio.store` domain property in Google Search Console, signed in as `avunorstudio@gmail.com`.
+2. Ownership is verified using the domain-name-provider DNS method. Preserve that DNS verification record; no HTML verification tag is needed for this domain property.
 3. Submit https://www.avunorstudio.store/sitemap.xml.
 4. Inspect https://www.avunorstudio.store/ and request indexing.
 5. Review indexing, performance, and Core Web Vitals as data becomes available.
@@ -32,3 +32,7 @@ Vercel's static `public/` hosting serves the SEO files directly. The Cloudflare 
 Run `npm run test:seo` after changing SEO files.
 
 References: [canonical URLs](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls), [organization markup](https://developers.google.com/search/docs/appearance/structured-data/organization), [sitemaps](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap).
+
+## Account setup confirmed — 14 November 2026
+
+The business Google account `avunorstudio@gmail.com` is a verified domain owner. The canonical sitemap shows Success and one discovered page. The earlier personal-account HTML verification tag has been removed from the website. DNS records were not modified. Google indexing and performance reports may take time to update.
