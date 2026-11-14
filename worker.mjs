@@ -39,6 +39,7 @@ export default {
     if (!['GET', 'HEAD'].includes(request.method)) return new Response('Method not allowed', { status: 405 });
     const asset = ASSETS[url.pathname === '/' ? '/index.html' : url.pathname];
     if (!asset) return new Response('Not found', { status: 404 });
-    return new Response(request.method === 'HEAD' ? null : asset.body, { headers: { 'Content-Type': asset.type, 'X-Content-Type-Options': 'nosniff' } });
+    const body = asset.encoding === 'base64' ? Uint8Array.from(atob(asset.body), char => char.charCodeAt(0)) : asset.body;
+    return new Response(request.method === 'HEAD' ? null : body, { headers: { 'Content-Type': asset.type, 'X-Content-Type-Options': 'nosniff' } });
   }
 };

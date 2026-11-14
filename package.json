@@ -7,7 +7,8 @@
   "scripts": {
     "build": "node build.mjs",
     "dev": "node build.mjs && node review-preview.mjs",
-    "test": "node review-test.mjs",
+    "test": "node review-test.mjs && node build.mjs && node seo-test.mjs",
+    "test:seo": "node build.mjs && node seo-test.mjs",
     "brand:generate": "node brand/generate-brand.mjs",
     "brand:validate": "node brand/validate-brand.mjs"
   },

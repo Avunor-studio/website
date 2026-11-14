@@ -29,7 +29,9 @@ The build creates a Cloudflare Worker module in `dist/server/index.js`, embeddin
 
 ## Hosting
 
-The existing deployment uses Sites and an R2 bucket bound as `BUCKET`. Keep that binding when deploying the Worker elsewhere; it stores submitted reviews. Static-only hosting will not run the review API. No GitHub deployment workflow is configured.
+The public production website is hosted on Vercel at https://www.avunorstudio.store/. Vercel serves the `public/` website assets. The separate Sites Worker deployment uses an R2 bucket bound as `BUCKET` for reviews; that storage binding is not automatically available on Vercel. Static-only hosting will not run the review API. No GitHub Actions deployment workflow is configured.
+
+See [SEO.md](SEO.md) for search metadata, sitemap details, and the remaining Google Search Console verification steps.
 
 ## Edit contact details
 
