@@ -62,3 +62,11 @@ Confirmed under `avunorstudio@gmail.com` on 14 November 2026:
 - Manual actions and security reports: no issues detected.
 
 The personal-account HTML verification tag was removed from the live Vercel site. This is a verification-method cleanup, not a claim that all historical Search Console access has been revoked. DNS records were not changed.
+
+## Brand search visibility and real projects
+
+On 14 November 2026, Search Console still reported the homepage as indexed, but it was not visible in the public Google results checked for the brand. Google corrected “avunor studio” to “avenor studio”; forcing the original query did not surface AVUNOR in the inspected results. Indexed status does not guarantee that a page is served for a particular search.
+
+The homepage title, introduction, and organization alternate name now explicitly include “AVUNOR Studio”. The portfolio lists the owner-supplied projects: Anime Max, a completed and live anime-merchandise e-commerce store, and an ongoing website for an astrologer. Anime Max's URL and the astrology project's public name have not yet been supplied; no destination, client identity, features, or results have been invented. Existing project anchors and the four sitemap URLs are preserved. The illustrative concepts remain labelled separately.
+
+Do not repeatedly request indexing for the same URLs. Monitor Search Console as Google processes the accepted requests; no search position or timing is guaranteed. See [how Google serves search results](https://developers.google.com/search/docs/fundamentals/how-search-works) and [recrawl guidance](https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl).
