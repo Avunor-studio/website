@@ -15,13 +15,13 @@ Production canonical URL: https://www.avunorstudio.store/
 
 ## Google Search Console setup
 
-1. Add the `avunorstudio.store` domain property in Google Search Console.
-2. Verify ownership using Google's DNS TXT record through the domain's DNS provider.
+1. Use the `https://www.avunorstudio.store/` URL-prefix property in Google Search Console.
+2. Verify ownership using the Google verification meta tag in the home page. Keep that tag in place to stay verified. A domain-wide property can optionally be added later using DNS verification.
 3. Submit https://www.avunorstudio.store/sitemap.xml.
 4. Inspect https://www.avunorstudio.store/ and request indexing.
 5. Review indexing, performance, and Core Web Vitals as data becomes available.
 
-Ownership verification and sitemap submission have not been performed by this repository. Metadata and structured data do not guarantee indexing, rankings, or rich results.
+The repository does not automate Search Console verification or sitemap submission; these actions are managed in Search Console. Metadata and structured data do not guarantee indexing, rankings, or rich results.
 
 ## Maintenance
 
