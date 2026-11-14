@@ -24,6 +24,7 @@ The build creates a Cloudflare Worker module in `dist/server/index.js`, embeddin
 - `public/`: HTML, responsive styles, client scripts, logo, and adaptive favicon.
 - `worker.mjs`: website serving and the `/api/reviews` GET/POST handlers.
 - `build.mjs`: dependency-free Worker build.
+- `generate-service-pages.mjs`: shared-layout service pages and the four-page sitemap, generated during the build.
 - `.openai/hosting.json`: existing Sites project and R2 binding configuration.
 - `brand/`: SVG masters, PNG logo exports, preview sheet, and brand guidance.
 
