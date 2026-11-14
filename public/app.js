@@ -14,7 +14,6 @@ const phone = (contact.whatsapp || '').replace(/[\s+()-]/g, '');
 const validPhone = /^[1-9]\d{6,14}$/.test(phone);
 const contactActions = {
   gmail: validEmail ? { label: contact.email + ' ↗', title: 'Email via Gmail', detail: contact.email, href: 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(contact.email), newTab: true } : null,
-  mailApp: validEmail ? { label: 'Use another email app ↗', href: 'mailto:' + contact.email } : null,
   whatsapp: validPhone ? { label: 'WhatsApp ' + contact.whatsapp + ' ↗', title: 'WhatsApp', detail: contact.whatsapp, href: 'https://wa.me/' + phone } : null,
   call: validPhone ? { label: 'Call ' + contact.whatsapp, title: 'Call us', detail: contact.whatsapp, href: 'tel:+' + phone } : null,
 };
@@ -35,8 +34,7 @@ if (validEmail) {
   const group = document.createElement('div');
   group.className = 'contact-email-group';
   const gmail = contactLink(contactActions.gmail);
-  const mailApp = contactLink(contactActions.mailApp, 'contact-email-app');
-  group.append(gmail, mailApp);
+  group.append(gmail);
   holder.append(group);
 }
 if (validPhone) holder.append(contactLink(contactActions.whatsapp));
@@ -51,7 +49,6 @@ for (const action of [contactActions.call, contactActions.whatsapp, contactActio
   link.replaceChildren(title, detail);
   panelActions.append(link);
 }
-if (contactActions.mailApp) panelActions.append(contactLink(contactActions.mailApp, 'contact-email-app'));
 if (validEmail || validPhone) launcher.hidden = false;
 function closeContactPanel() {
   if (panel.hidden) return;
