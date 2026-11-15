@@ -14,6 +14,8 @@ assert(!/<meta name="robots"[^>]*noindex/i.test(html));
 const schema = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
 const organization = schema['@graph'].find(item => item['@type'] === 'Organization');
 assert.equal(organization.url, origin + '/');
+assert.equal(organization.name, 'AVUNOR Studio');
+assert.deepEqual(organization.sameAs, ['https://github.com/Avunor-studio/website']);
 assert.equal(organization.email, 'avunorstudio@gmail.com');
 assert.equal(organization.telephone, '+919442041516');
 assert(!JSON.stringify(schema).includes('aggregateRating'));
