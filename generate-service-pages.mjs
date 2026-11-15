@@ -91,7 +91,26 @@ for (const page of pages) {
   const graph = JSON.parse(home.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
   const webPage = graph['@graph'].find(item => item['@type'] === 'WebPage');
   Object.assign(webPage, { '@id': url + '#webpage', url, name: page.title, description: page.description, mainEntity: { '@id': url + '#service' } });
-  graph['@graph'].push({ '@type': 'Service', '@id': url + '#service', name: page.name, serviceType: page.name, url, description: page.description, areaServed: 'Worldwide', provider: { '@id': origin + '/#organization' } });
+  graph['@graph'].push(
+    { '@type': 'Service', '@id': url + '#service', name: page.name, serviceType: page.name, url, description: page.description, areaServed: 'Worldwide', provider: { '@id': origin + '/#organization' } },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': url + '#breadcrumb',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: origin + '/' },
+        { '@type': 'ListItem', position: 2, name: page.name, item: url },
+      ],
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': url + '#faq',
+      mainEntity: page.faqs.map(([question, answer]) => ({
+        '@type': 'Question',
+        name: question,
+        acceptedAnswer: { '@type': 'Answer', text: answer },
+      })),
+    },
+  );
   html = html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, `<script type="application/ld+json">${JSON.stringify(graph)}</script>`);
   const related = pages.filter(other => other !== page).map(other => `<a href="${other.file}">${other.name} <span aria-hidden="true">↗</span></a>`).join('');
   const content = `<main id="main" class="service-detail"><section class="wrap service-detail-hero"><a class="service-back" href="/#services">← All services</a><p class="eyebrow">AVUNOR / SERVICES FOR CUSTOMERS WORLDWIDE</p><h1>${page.headline}</h1><p class="service-lead">${page.intro}</p><a class="button" href="#contact">Discuss your project <span aria-hidden="true">↗</span></a></section><section class="section services"><div class="wrap"><h2>${page.section}</h2><p class="service-explanation">${page.explanation}</p><div class="service-grid">${page.offerings.map(([title,description]) => `<article><h3>${title}</h3><p>${description}</p></article>`).join('')}</div></div></section><section class="section wrap"><p class="eyebrow">GETTING STARTED</p><h2>Bring your idea.<br>We’ll shape the next step.</h2><p class="service-explanation">${page.preparation}</p><ol class="service-process"><li><strong>Discover</strong><span>Agree on your audience, goals, and project scope.</span></li><li><strong>Design</strong><span>Map the key journeys and review the interface direction.</span></li><li><strong>Build</strong><span>Develop and test the agreed features, sharing progress along the way.</span></li><li><strong>Launch</strong><span>Prepare the release and hand over the completed project.</span></li></ol></section><section class="section service-faq-section"><div class="wrap"><h2>Your questions, answered.</h2><div class="service-faq">${page.faqs.map(([question,answer])=>`<details><summary>${question}</summary><p>${answer}</p></details>`).join('')}</div></div></section><section class="section wrap related-services"><p class="eyebrow">EXPLORE MORE</p><h2>More ways to build.</h2><nav aria-label="Related services">${related}</nav></section>${contact}</main>`;
