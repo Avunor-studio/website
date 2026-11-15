@@ -45,9 +45,14 @@ for (const file of ['website-development.html', 'mobile-app-development.html', '
   titles.add(page.match(/<title>(.*?)<\/title>/)[1]);
   const data = JSON.parse(page.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
   const service = data['@graph'].find(item=>item['@type']==='Service');
+  const breadcrumb = data['@graph'].find(item=>item['@type']==='BreadcrumbList');
+  const faq = data['@graph'].find(item=>item['@type']==='FAQPage');
   assert.equal(service.url, url);
   assert.equal(service.areaServed, 'Worldwide');
   assert.equal(service.provider['@id'], origin + '/#organization');
+  assert.deepEqual(breadcrumb.itemListElement.map(item => item.item), [origin + '/', url]);
+  assert.equal(faq.mainEntity.length, 4);
+  assert(faq.mainEntity.every(item => item['@type'] === 'Question'));
   for (const anchor of page.matchAll(/href="(#[^"]+)"/g)) assert(page.includes(`id="${anchor[1].slice(1)}"`), file + ': ' + anchor[1]);
   const response = await worker.fetch(new Request(url), {});
   assert.equal(response.status, 200);
