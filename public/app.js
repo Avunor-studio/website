@@ -49,7 +49,15 @@ for (const action of [contactActions.call, contactActions.whatsapp, contactActio
   link.replaceChildren(title, detail);
   panelActions.append(link);
 }
-if (validEmail || validPhone) launcher.hidden = false;
+if (validEmail || validPhone) {
+  launcher.hidden = false;
+  function updateLauncherScroll() {
+    const showThreshold = Math.min(320, window.innerHeight * 0.45);
+    launcher.classList.toggle('is-scrolled', window.scrollY > showThreshold);
+  }
+  window.addEventListener('scroll', updateLauncherScroll, { passive: true });
+  updateLauncherScroll();
+}
 function closeContactPanel() {
   if (panel.hidden) return;
   panel.hidden = true;
